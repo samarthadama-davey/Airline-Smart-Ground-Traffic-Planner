@@ -1,0 +1,78 @@
+# MODULE 2 — SEARCHING ALGORITHMS
+# BFS / UCS / A*
+# ============================================================
+
+class SearchAlgorithms:
+    def __init__(self, graph):
+        self.graph = graph
+
+    def bfs(self, start, goal):
+        queue = deque([(start, [start])])
+        visited = set()
+
+        while queue:
+            node, path = queue.popleft()
+
+            if node == goal:
+                return path
+
+            visited.add(node)
+
+            for neighbor in self.graph[node]:
+                if neighbor not in visited:
+                    queue.append((neighbor, path + [neighbor]))
+
+        return None
+
+    def ucs(self, start, goal):
+        pq = [(0, start, [start])]
+        visited = set()
+
+        while pq:
+            cost, node, path = heapq.heappop(pq)
+
+            if node == goal:
+                return cost, path
+
+            if node in visited:
+                continue
+
+            visited.add(node)
+
+            for neighbor in self.graph[node]:
+                new_cost = cost + self.graph[node][neighbor]
+                heapq.heappush(
+                    pq,
+                    (new_cost, neighbor, path + [neighbor])
+                )
+
+        return None
+
+    def heuristic(self, node, goal):
+        return 1
+
+    def astar(self, start, goal):
+        pq = [(0, start, [start])]
+        visited = set()
+
+        while pq:
+            cost, node, path = heapq.heappop(pq)
+
+            if node == goal:
+                return cost, path
+
+            if node in visited:
+                continue
+
+            visited.add(node)
+
+            for neighbor in self.graph[node]:
+                g = cost + self.graph[node][neighbor]
+                h = self.heuristic(neighbor, goal)
+
+                heapq.heappush(
+                    pq,
+                    (g + h, neighbor, path + [neighbor])
+                )
+
+        return None
