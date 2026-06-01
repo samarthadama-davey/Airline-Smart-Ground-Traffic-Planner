@@ -1,0 +1,25 @@
+# ============================================================
+# MODULE 3 — CONSTRAINT SATISFACTION (CSP)
+# Conflict Detection Between Aircraft
+# ============================================================
+
+class ConstraintSatisfaction:
+
+    def check_conflicts(self, aircraft_positions):
+        visited = {}
+
+        print("\n========== CONFLICT CHECK ==========")
+
+        for aircraft, position in aircraft_positions.items():
+
+            if position in visited:
+                print(
+                    f"Conflict Detected: {aircraft} and "
+                    f"{visited[position]} at {position}"
+                )
+                return False
+
+            visited[position] = aircraft
+
+        print("Conflict Avoided — Safe Ground Movement")
+        return True
