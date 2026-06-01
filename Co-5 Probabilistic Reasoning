@@ -1,0 +1,14 @@
+# ============================================================
+# MODULE 5 — PROBABILISTIC REASONING
+# Taxi Delay Probability
+# ============================================================
+
+class ProbabilisticReasoning:
+
+    def delay_probability(self):
+        probability = round(random.uniform(0.20, 0.45), 2)
+
+        print("\n========== PROBABILITY MODEL ==========")
+        print(f"P(Delay) = {probability}")
+
+        return probability
