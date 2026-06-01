@@ -1,0 +1,30 @@
+# ============================================================
+# PROJECT 7 : AIRLINE SMART GROUND TRAFFIC PLANNER
+# AI-Based System for Intelligent and Safe Airport Ground Operations
+# ============================================================
+
+import heapq
+import random
+from collections import deque
+
+# ============================================================
+# MODULE 1 — PEAS & DATA STRUCTURES
+# ============================================================
+
+class AirportGroundGraph:
+    def __init__(self):
+        self.graph = {}
+
+    def add_edge(self, src, dest, cost):
+        if src not in self.graph:
+            self.graph[src] = {}
+        if dest not in self.graph:
+            self.graph[dest] = {}
+
+        self.graph[src][dest] = cost
+        self.graph[dest][src] = cost
+
+    def display(self):
+        print("\n========== AIRPORT GROUND GRAPH ==========")
+        for node in self.graph:
+            print(node, "->", self.graph[node])
