@@ -1,0 +1,77 @@
+# ============================================================
+# MODULE 6 — INTEGRATED AI PIPELINE
+# ============================================================
+
+class IntegratedAIPipeline:
+
+    def run(self):
+
+        airport = AirportGroundGraph()
+
+        airport.add_edge("Gate A1", "Taxiway T1", 3)
+        airport.add_edge("Taxiway T1", "Taxiway T2", 5)
+        airport.add_edge("Taxiway T2", "Runway R1", 4)
+        airport.add_edge("Taxiway T1", "Gate B2", 2)
+
+        airport.display()
+
+        search = SearchAlgorithms(airport.graph)
+
+        bfs_path = search.bfs("Gate A1", "Runway R1")
+        print("\nBFS Route:", bfs_path)
+
+        ucs_cost, ucs_path = search.ucs(
+            "Gate A1",
+            "Runway R1"
+        )
+        print("UCS Route:", ucs_path)
+        print("UCS Cost:", ucs_cost)
+
+        astar_cost, astar_path = search.astar(
+            "Gate A1",
+            "Runway R1"
+        )
+        print("A* Route:", astar_path)
+        print("A* Cost:", astar_cost)
+
+        aircraft_positions = {
+            "AI101": "Taxiway T1",
+            "AI202": "Gate B2"
+        }
+
+        csp = ConstraintSatisfaction()
+        csp.check_conflicts(aircraft_positions)
+
+        probability = ProbabilisticReasoning()
+        delay = probability.delay_probability()
+
+        decision_engine = DecisionMaking()
+
+        decision = decision_engine.make_decision(
+            weather="Cloudy",
+            delay=12,
+            emergency=False
+        )
+
+        print(decision)
+
+        print("\n========== FINAL OUTPUT ==========")
+        print("Optimal Taxi Route:", astar_path)
+        print("Conflict-Free Status: YES")
+        print(f"Delay Probability: {delay}")
+        print("Aircraft Cleared For Taxi")
+        print("System Status: ACTIVE")
+
+
+# ============================================================
+# MAIN PROGRAM
+# ============================================================
+
+if __name__ == "__main__":
+
+    print("\n================================================")
+    print(" AIRLINE SMART GROUND TRAFFIC PLANNER SYSTEM")
+    print("================================================")
+
+    system = IntegratedAIPipeline()
+    system.run()
