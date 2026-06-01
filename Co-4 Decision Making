@@ -1,0 +1,22 @@
+# ============================================================
+# MODULE 4 — DECISION MAKING
+# Weather / Delay / Emergency Handling
+# ============================================================
+
+class DecisionMaking:
+
+    def make_decision(self, weather, delay, emergency):
+
+        print("\n========== AI DECISION MAKING ==========")
+
+        if emergency:
+            return "Emergency Detected → Hold Position"
+
+        elif weather == "Storm":
+            return "Storm Alert → Assign New Route"
+
+        elif delay > 15:
+            return "Delay High → Prioritize Departure Taxi Route"
+
+        else:
+            return "Conditions Normal → Continue Taxiing"
